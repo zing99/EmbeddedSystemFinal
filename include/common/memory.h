@@ -90,4 +90,75 @@ void set_all(char * ptr, char value, unsigned int size);
  */
 void clear_all(char * ptr, unsigned int size);
 
+/**
+ * @breif Move memory element
+ * 
+ * Moves memory element from source to destination by taking their 
+ * pointers as input.
+ *
+ * @return int pointer
+ */
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
+
+/**
+ * @breif Copies memory element
+ * 
+ * Copies memory element from source to desination by taking their
+ * pointers as input.
+ * 
+ * @return int pointer
+ */
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
+
+/**
+ * @breif Sets a given value to a memory element
+ *
+ * This should take a pointer to a source memory location, a length in
+ * bytes and set all locations of that memory to a given value.
+ * 
+ * @return int pointer
+ */
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
+
+/**
+ * @breif Sets value of a memory element to zero
+ * 
+ * This should take a pointer to a memory location, a length in bytes and
+ * zero out all of the memory.
+ *
+ * @return int pointer
+ */
+uint8_t * my_memzero(uint8_t * src, size_t length);
+
+/**
+ * @breif Reverses the order of bytes of the memory element
+ *
+ * This should take a pointer to a memory location and a length in bytes
+ * and reverse the order of all of the bytes.
+ *
+ * @return int pointer
+ */
+uint8_t * my_reverse(uint8_t * src, size_t length);
+
+/**
+ * @breif Reserves specified number of words in memory
+ * 
+ * This should take number of words to allocate in dynamic memory
+ *
+ * @return int pointer / NULL
+ */
+int32_t * reserve_words(size_t length);
+
+/**
+ * @breif Frees memory from a specified location.
+ * 
+ * Should free a dynamic memory allocation by providing the pointer src to
+ * the function.
+ *
+ * @return void
+ */
+void free_words(int32_t * src);
+
+/****************************************************************************/
+
 #endif /* __MEMORY_H__ */
