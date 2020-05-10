@@ -32,13 +32,14 @@ endif
 #ADDING INCLUDE PATHS
 
 ifeq ($(PLATFORM),MSP432)
-  INCLUDEHEADER= 	   -I../include/CMSIS \
-			   -I../include/common \
-			   -I../include/msp432 \
-			   -I../ 
+  INCLUDEHEADER= 	   -I./include/CMSIS \
+			   -I./include/common \
+			   -I./include/msp432 \
+			   -I./ 
 else
-    INCLUDEHEADER=         -I../include/common\
-		           -I../	   
-    INCLUDESRC= 	   -I../src
+    INCLUDESRC = 	   -I./src
+
+    INCLUDEHEADER=         -I./include/common\
+		           -I./
 endif
 

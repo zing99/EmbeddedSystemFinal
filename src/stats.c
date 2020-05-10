@@ -26,7 +26,7 @@
 #define SIZE (40)
 
 
-void main() {
+int main() {
   int arlen= 40;
   unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
                               114, 88,   45,  76, 123,  87,  25,  23,
@@ -35,8 +35,7 @@ void main() {
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
  
-  printf("***ORIGINAL ARRAY***\n");
-  print_array(test);
+  
   float mean = find_mean(test,arlen);
   float median = find_median(test,arlen);
   int max = find_maximum(test,arlen);
@@ -51,27 +50,28 @@ void print_statistics(unsigned char ar[], int mi, int ma,
 {	
 	printf("***SORTED ARRAY***\n");
 	sort_array(ar,40);
-	print_array(ar);
 	printf("\n");
 	printf("Maximum :%d\nMinimum :%d\nMean :%f\nMedian :%f\n",
 		ma,mi,me,md);
 }
 	
 
-void print_array(unsigned char prarr[])
-{	int i,j;
-	j=0;
-       for(i = 0; i<40; i++)
-       {	
-	       printf("%d, ",prarr[i]);
-		j++;
-		if(j%8==0)
-		{	printf("\n");
-	
-		}
-		
-	}
-
+void print_array(unsigned char * t, int size)
+{	int i;
+	if(t == NULL)
+		return;
+	#if !defined (VERBOSE) && defined (HOST)
+	#undef PRINTF
+	#define PRINTF(...)  
+	#endif
+	PRINTF("ARRAY\n");
+	for( i = 0; i < size; i++)
+		PRINTF("%u\t",(unsigned char)t[i]);
+	PRINTF("\n");
+	#if defined (VERBOSE) && defined (HOST)
+	#undef PRINTF 
+	#define PRINTF(...) printf(__VA_ARGS__)
+	#endif
 }
 
 void sort_array(unsigned char inarr[], int size)

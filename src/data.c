@@ -44,7 +44,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 	len = i;
 	i = 0;
 
-        for ( i = 0; i < (length)/2; i++)
+        for ( i = 0; i < (len)/2; i++)
 	{
                 t = *(ptr + i );
                 *(ptr + i ) = *( ptr + len - i - 1);
@@ -56,33 +56,31 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 }
 /*******************************************************************/
 
-int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base)
-{
-	uint8_t t = uint8_t base;
-	uint8_t i;
+int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base) {
+
 	int32_t data = 0;
+	uint8_t t = (uint8_t)base;
 	base = 1;
-	data = 0;
-
-	if(!ptr)               /* If there is a null pointer*/
+	uint8_t i = digits-2;
+		
+	if(!ptr)
 		return -1;
-
-	while( i > 0 )         /* Converting string integer */
-	{
-		data = data +  *(ptr + i) * (base) ;
+	
+	while( i > 0 ) {
+		data += *(ptr + i ) * ( base ) ;
 		i = i - 1;
 		base*= t;
 	}
-	 
-	if(temp == 10 && *(ptr + i) == '-')  /* Checking for negetive 
-						sign */
+	
+	
+	if(t == 10 && *(ptr + i) == '-')    
 		data = -data;
 	else
-		data = data +  *(ptr + i) * (base); 
+		data += *(ptr + i) * ( base ); 
 	
 	return data;
-}
 
+}
 /*********************************************************************/
 
 

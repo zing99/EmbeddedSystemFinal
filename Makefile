@@ -27,13 +27,6 @@
 #------------------------------------------------------------------------------
 include sources.mk
 
-#COMMON FLAGS
-TARGET = c1
-CFLAGS = -Wall -Werror $(V) -O0 -std=c99 $(INCLUDEHEADER) -D$(PLATFORM) $(ARMFLAGS) -D$(VERBOSE)
-
-CPPFLAGS = -E
-MAIN = main
-
 #MSP432 SPECIFIC FLAGS
 ifeq ($(PLATFORM),MSP432)
 		CC = arm-none-eabi-gcc
@@ -60,11 +53,20 @@ else
 
 endif
 
+#COMMON FLAGS
+
 VPATH = ./src
-ifeq($(VERBOSE), VERBOSE)
-	V= -g
+ 
+ifeq ($(VERBOSE),VERBOSE)
+		V = -g
 endif
 
+TARGET = c1
+
+CFLAGS = -Wall -Werror $(V)  -O0 -std=c99 $(INCLUDEHEADER) -D$(PLATFORM) $(ARMFLAGS)
+
+CPPFLAGS = -E
+MAIN = main
 #BUILD TARGETS
 
 OBJS  = $(SOURCES:.c=.o)
@@ -94,4 +96,5 @@ $(TARGET).out: $(OBJS) $(DEPS)
 	
 .PHONY: clean
 clean:
-	rm -f $(TARGET).asm $(FILES) $(TARGET).out $(TARGET).map $(PRE) $(ASM) $(DEPS) $(OBJS)
+	rm -f $(TARGET).asm $(FILES) $(TARGET).out $(TARGET).map \
+	       	$(PRE) $(ASM) $(DEPS) $(OBJS)

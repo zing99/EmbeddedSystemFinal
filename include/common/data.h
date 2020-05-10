@@ -6,8 +6,8 @@
 *	@Author: Sushrut Manu Singh
 *	@Date  : 09-05-2020
 *****************************************************************/
-
-uint8_t my_itoa(int_32t data, unit8_t *ptr, unit32_t base);
+#include <stdint.h>
+uint8_t my_itoa(int32_t data, uint8_t *ptr, uint32_t base);
 
 /* @Breif To convert data from a standard integer type into an
  * ASCII string.
@@ -16,9 +16,9 @@ uint8_t my_itoa(int_32t data, unit8_t *ptr, unit32_t base);
  * provided by taking a char data set, integer and base as input.
  * 
  * @Return : Length of the string
- * /
+ */
 
-int32_t my_atoi(uint_t *ptr, uint8_t digits, uint32_t base)
+int32_t my_atoi(uint8_t *ptr, uint8_t digits, uint32_t base);
 
 /* @Breif To convert data from an ASCII string into a standard
  * integer type data.
@@ -28,5 +28,5 @@ int32_t my_atoi(uint_t *ptr, uint8_t digits, uint32_t base)
  * and base as input.
  * 
  * @Return : Value of the integer
- * /
+ */
 

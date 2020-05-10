@@ -33,7 +33,7 @@ void print_statistics(unsigned char arr[], int min, int max,
  *
  */
 
-void print_array(unsigned char arr[]);
+void print_array(unsigned char * temp, int size);
 /*
  * @breif Prints the array provided.
  *
