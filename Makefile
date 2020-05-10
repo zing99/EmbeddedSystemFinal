@@ -27,32 +27,30 @@
 #------------------------------------------------------------------------------
 include sources.mk
 
+#MSP432 SPECIFIC FLAGS
 ifeq ($(PLATFORM),MSP432)
 		CC = arm-none-eabi-gcc
 		LD = arm-none-eabi-ld
 		LINKER_FILE = msp432p401r.lds
 		LDFLAGS = -Wl,-Map=$(TARGET).map -T $(LINKER_FILE)
 
-		# Architectures Specific Flags ARM
 		CPU = cortex-m4
 		ARCH = thumb
 		SPECS = nosys.specs
 		FPU = fpv4-sp-d16
 		ARMFLAGS = -mcpu=$(CPU) -m$(ARCH) --specs=$(SPECS) -march=armv7e-m -mfloat-abi=hard -mfpu=$(FPU)		
 		OBJDUMP = arm-none-eabi-objdump
-
-		#Size Utility
 		SIZE = arm-none-eabi-size 
+
+#HOST SPECIFIC FLAGS
 else
 		CC = gcc
 		LD = ld
-		#Size Utility
 		SIZE = size
 		LDFLAGS = -Wl,-Map=$(TARGET).map
 		OBJDUMP = objdump
 endif
 
-#Verbose Flag enabled in Cmd, prints debug information
 
 VPATH = ./src
  
@@ -61,10 +59,8 @@ ifeq ($(VERBOSE),VERBOSE)
 endif
 
 
-
-# Compiler Flags and Defines
-	#-D$(PLATFORM) is put inside the CFLAGS. 
-
+ 
+#COMMON FLAGS
 TARGET = final
 
 CFLAGS = -Wall -Werror $(VER) -O0 -std=c99 $(INCLUDEHEADER) $(INCLUDESCR) -D$(PLATFORM) $(ARMFLAGS) $(VERBOSE) $(COURSE1)
@@ -82,37 +78,23 @@ DEPS = $(SOURCES:.c=.d)
 
 FILES = *.asm *.i *.o *.d
 
+#GENERATE OBJECT FILES WITHOUT LINKING	
 %.o : %.c
 	$(CC) -c $< $(CFLAGS) -o $@
-
-#%.i : %.c
-#	$(CC) $(INCLUDES) $(CPPFLAGS) $< $(CFLAGS) -o $@
-
-#%.asm : %.c
-#	$(CC) $(INCLUDES) -S $< $(CFLAGS) -o $@
-
-#$(TARGET).asm : $(TARGET).out
-#	$(OBJDUMP) -d $(TARGET).out >> $@
-
-#%.d : %.c
-#	$(CC) $(INCLUDES) -M $< $(CFLAGS) -o $@
 
 .PHONY: compile-all
 compile-all: $(OBJS)
 	$(CC) $(INCLUDES) $(OBJS) -c $(CFLAGS) -o $(TARGET).o
 
 
-# $ make build PLATFORM=HOST, $ make build PLATFORM=MSP432, builds and generates all the files necessary.
+
 .PHONY: build
 build: $(TARGET).out  #$(TARGET).asm
 
 
 $(TARGET).out: $(OBJS) #$(DEPS) 
 	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) -o $@ $(OBJS)
-#	$(SIZE) -Atd $(TARGET).out
-#	$(SIZE) $(TARGET).out
 
-#$ make clean,  cleans all the generated files.
 .PHONY: clean
 clean:
 	rm -f $(TARGET).asm $(FILES) $(TARGET).out $(TARGET).map $(PREPRO) $(ASMS) $(DEPS) $(OBJS)
