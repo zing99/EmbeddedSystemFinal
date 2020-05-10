@@ -21,6 +21,7 @@
 
 #include <stdio.h>
 #include "stats.h"
+#include "platform.h"
 
 #define SIZE (40)
 
@@ -125,4 +126,3 @@ float find_median(unsigned char inputarr[], int lengt)
 	else medianval=(inputarr[centre]+inputarr[centre+1])/2;
 	return medianval;
 }
-

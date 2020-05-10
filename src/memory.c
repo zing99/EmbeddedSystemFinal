@@ -48,3 +48,106 @@ void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
 
+/*******************************************************************/
+
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) 
+{
+
+	uint8_t i = 0;
+	uint8_t *t;
+	t = (uint8_t*)reserve_words(length);
+	
+	for( i = 0; i < length; i++)
+	{
+                *(t + i ) = *( src + i );
+        }
+
+	for( i = 0; i < length; i++)
+	{
+		*(dst + i ) = *( t + i );
+	}
+	
+	return dst;
+	free_words((uint32_t*)t);
+
+}
+
+/*******************************************************************/
+
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) 
+{
+
+	uint8_t i = 0;
+
+        for( i = 0; i < length; i++)
+	{
+                *( dst + i ) = *( src + i );
+        }
+
+        return dst;
+
+}
+
+/*******************************************************************/
+
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) 
+{
+
+	uint8_t i = 0;
+	for( i = 0; i < length; i++)
+	{
+        	*( src + i ) = value ;
+        }
+
+	return src;
+
+}
+
+/*******************************************************************/
+
+uint8_t * my_memzero(uint8_t * src, size_t length)  /*Setting to zero*/
+{
+
+	src = my_memset(src, length, 0 );
+	return src;
+
+}
+
+/*******************************************************************/
+
+uint8_t * my_reverse(uint8_t * src, size_t length)  /*Reversing the 
+						      segment*/
+{
+	uint8_t i = 0;
+	int32_t t;
+	for ( i = 0; i <= (length-1)/2; i++)
+	{
+		t = *(src + i );
+		*(src + i ) = *( src + length - i - 1);
+		*( src + length - i - 1) = t;
+	}
+
+	return src;
+
+}
+
+/********************************************************************/
+
+int32_t * reserve_words(size_t length) /* Reserving given length*/
+{
+	int32_t *ptr;
+	ptr  = ( int32_t *)malloc(length * sizeof(int32_t));
+	return ptr;
+
+}
+
+/*********************************************************************/
+
+void free_words(uint32_t * src) /* Freeing memory element*/
+{
+
+	free(src);
+
+}
+
+/*********************************************************************/
