@@ -28,7 +28,7 @@
 char buffer[MAX_LENGTH];
 
 /* A pretty boring main file */
-int main(void) 
+int mai(void) 
 {
   #ifdef COURSE1
 	couese1();

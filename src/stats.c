@@ -42,7 +42,7 @@ int main() {
   int min = find_minimum(test,arlen);
   printf("****STATS****\n");
   print_statistics(test, min, max, mean, median);
-
+  return 0;
 }
 
 void print_statistics(unsigned char ar[], int mi, int ma, 

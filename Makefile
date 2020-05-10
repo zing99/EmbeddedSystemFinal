@@ -55,24 +55,24 @@ endif
 VPATH = ./src
  
 ifeq ($(VERBOSE),VERBOSE)
-		VER = -g
+		V = -g
 endif
 
 
  
 #COMMON FLAGS
-TARGET = final
+TARGET = c1
 
-CFLAGS = -Wall -Werror $(VER) -O0 -std=c99 $(INCLUDEHEADER) $(INCLUDESCR) -D$(PLATFORM) $(ARMFLAGS) $(VERBOSE) $(COURSE1)
+CFLAGS = -Wall -Werror $(V) -O0 -std=c99 $(INCLUDEHEADER) $(INCLUDESCR) -D$(PLATFORM) $(ARMFLAGS) $(VERBOSE) $(COURSE1)
 
 CPPFLAGS = -E
 MAIN = main
 
 OBJS = $(SOURCES:.c=.o)
 
-PREPRO = $(SOURCES:.c=.i)
+PRE = $(SOURCES:.c=.i)
 
-ASMS = $(SOURCES:.c=.asm)
+ASM = $(SOURCES:.c=.asm)
 
 DEPS = $(SOURCES:.c=.d)
 
@@ -97,4 +97,4 @@ $(TARGET).out: $(OBJS) #$(DEPS)
 
 .PHONY: clean
 clean:
-	rm -f $(TARGET).asm $(FILES) $(TARGET).out $(TARGET).map $(PREPRO) $(ASMS) $(DEPS) $(OBJS)
+	rm -f $(TARGET).asm $(FILES) $(TARGET).out $(TARGET).map $(PRE) $(ASM) $(DEPS) $(OBJS)
