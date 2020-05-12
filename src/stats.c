@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include "stats.h"
 #include "platform.h"
+#include "course1.h"
 
 #define SIZE (40)
 
@@ -40,8 +41,14 @@ int main() {
   float median = find_median(test,arlen);
   int max = find_maximum(test,arlen);
   int min = find_minimum(test,arlen);
+  sort_array(test,40);
   printf("****STATS****\n");
   print_statistics(test, min, max, mean, median);
+  unsigned char *ptr = test;
+  print_array(ptr,40);
+  #ifdef COURSE1
+	course1();
+  #endif
   return 0;
 }
 
@@ -53,6 +60,7 @@ void print_statistics(unsigned char ar[], int mi, int ma,
 	printf("\n");
 	printf("Maximum :%d\nMinimum :%d\nMean :%f\nMedian :%f\n",
 		ma,mi,me,md);
+	printf("Array will be printed only if VERBOSE FLAG is enabled\n");
 }
 	
 

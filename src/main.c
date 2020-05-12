@@ -23,6 +23,7 @@
 #include "platform.h"
 #include "memory.h"
 #include "course1.h"
+#include "stats.h"
 
 #define MAX_LENGTH (10)
 char buffer[MAX_LENGTH];
@@ -30,10 +31,12 @@ char buffer[MAX_LENGTH];
 /* A pretty boring main file */
 int mai(void) 
 {
-  #ifdef COURSE1
-	couese1();
+  #ifdef COURSE
+	course1();
+	PRINTF("COURSE1 Enabled");
+  #endif
   
-  #else
+  
   
   unsigned int i;
   char value;
@@ -56,8 +59,8 @@ int mai(void)
     PRINTF("%c", buffer[i]);
   }
   PRINTF("\n");
-
-  #endif
+  
+  
 
   return 0;
 }
